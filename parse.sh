@@ -7,8 +7,6 @@ TWENTY=0
 ARRAY=()
 while read -r line; do
   code=`echo "$line" | grep -o "\s[0-9][0-9][0-9]" | xargs`
-  echo "$line"
-  echo "$code"
    case $code in 
     [5]*)
        ((FIFTY++))
@@ -31,6 +29,6 @@ echo "40x: $FORTY |s"
 echo "30x: $THIRTY |s"
 echo "20x: $TWENTY |s"
 
-echo ${ARRAY[*]}
+echo ${ARRAY[*]} 
 
 
