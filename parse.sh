@@ -4,12 +4,13 @@ FIFTY=0
 FORTY=0
 THIRTY=0
 TWENTY=0
-
-for i in `grep -o "\s\b[0-9][0-9][0-9]\b\s" sample.log `; do
-  echo "$i" 
-   case "$i" in 
+ARRAY=()
+while read -r line; do
+  code=`echo "$line" | grep -o "\s[0-9][0-9][0-9]" | xargs`
+   case $code in 
     [5]*)
-      ((FIFTY++))
+       ((FIFTY++))
+       ARRAY=("${ARRAY[@]}" "$line")
     ;;
      [4]*)
       ((FORTY++))
@@ -18,16 +19,16 @@ for i in `grep -o "\s\b[0-9][0-9][0-9]\b\s" sample.log `; do
       ((THIRTY++))
     ;;
      [2]*)
-      ((TWENTY++))
+       ((TWENTY++))
     ;;
    esac
-done
+ done <<< "$(grep -o "[GPD][EU][TL].*\s\b[0-9][0-9][0-9]\b\s" sample.log)" 
 
 echo "50x: $FIFTY |s"
 echo "40x: $FORTY |s"
 echo "30x: $THIRTY |s"
 echo "20x: $TWENTY |s"
 
-
+echo ${ARRAY[*]} 
 
 
